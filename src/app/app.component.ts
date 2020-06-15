@@ -1,18 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: '<router-outlet></router-outlet>',
 })
-export class AppComponent {
-  courses: any[];
-
-  constructor(private db: AngularFirestore) {
-    this.db
-      .collection('/courses')
-      .valueChanges()
-      .subscribe((res) => (this.courses = res));
-  }
-}
+export class AppComponent {}
