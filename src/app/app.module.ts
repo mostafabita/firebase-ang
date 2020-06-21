@@ -9,11 +9,29 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 import { LandingComponent } from './pages/landing/landing.component';
-import { CoursesComponent } from './pages/courses/courses.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CoursesComponent } from './components/courses/courses.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MasterComponent } from './pages/master/master.component';
+import { MenusComponent } from './components/menus/menus.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, CoursesComponent],
+  declarations: [
+    AppComponent,
+    CoursesComponent,
+    LoginComponent,
+    SignupComponent,
+    LandingComponent,
+    DashboardComponent,
+    HeaderComponent,
+    MasterComponent,
+    MenusComponent,
+    ProfileComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,5 +1,11 @@
+$enable-rounded: false;
+$font-family-base: 'Roboto', sans-serif;
+
+@import '~bootstrap/scss/bootstrap';
+
 /* You can add global styles to this file, and also import other style files */
 body,
 html {
   height: 100%;
+  background-color: #eee;
 }
