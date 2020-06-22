@@ -2,4 +2,15 @@
   border-radius: 50%;
   max-width: 100%;
   width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-color: #ddd;
+  background-position: center;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+  font-weight: bolder;
+  color: white;
 }

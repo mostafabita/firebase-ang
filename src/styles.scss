@@ -1,14 +1,10 @@
-$enable-rounded: false;
+@import 'theme/bootstrap/bootstrap';
+
 $font-family-base: 'Roboto', sans-serif;
+$link-color: theme-color('success') !default;
 
-@import '~bootstrap/scss/bootstrap';
-
-/* You can add global styles to this file, and also import other style files */
 body,
 html {
   height: 100%;
   background-color: #eee;
 }
-
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';

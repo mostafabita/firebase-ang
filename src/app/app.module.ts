@@ -20,6 +20,8 @@ import { MenusComponent } from './components/menus/menus.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsComponent } from './components/toasts/toasts.component';
+import { SafeBgUrlPipe } from './pipes/safe-bg-url.pipe';
+import { AbbrPipe } from './pipes/abbr.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ToastsComponent } from './components/toasts/toasts.component';
     MenusComponent,
     ProfileComponent,
     ToastsComponent,
+    SafeBgUrlPipe,
+    AbbrPipe,
   ],
   imports: [
     BrowserModule,

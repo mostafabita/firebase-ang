@@ -19,9 +19,9 @@ export class SignupComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.fb.group({
+      name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      rememberMe: [false],
     });
   }
 
@@ -34,7 +34,16 @@ export class SignupComponent implements OnInit {
         this.form.value.password
       )
       .then((res) => {
-        this.router.navigate(['/dashboard']);
+        res.user
+          .updateProfile({
+            displayName: this.form.value.name,
+          })
+          .then((res) => {
+            this.router.navigate(['/dashboard']);
+          })
+          .catch((error) => {
+            this.toast.error(error.message);
+          });
       })
       .catch((error) => {
         this.toast.error(error.message);
