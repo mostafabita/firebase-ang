@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,16 +9,7 @@ import { User } from 'firebase';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  user: any;
+  constructor(public auth: AuthService) {}
 
-  constructor(private afAuth: AngularFireAuth) {}
-
-  ngOnInit(): void {
-    this.afAuth.authState.subscribe((data: User) => {
-      this.user = {
-        displayName: data.displayName,
-        photoUrl: data.photoURL,
-      };
-    });
-  }
+  ngOnInit(): void {}
 }

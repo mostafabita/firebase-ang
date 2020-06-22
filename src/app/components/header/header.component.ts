@@ -9,11 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {}
 
   logout() {
-    this.authService.logout();
+    this.auth.logout();
   }
 }

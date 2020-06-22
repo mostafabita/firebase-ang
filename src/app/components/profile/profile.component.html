@@ -1,4 +1,7 @@
-<div class="d-flex flex-column align-items-center mb-3 pb-2 border-bottom">
+<div
+  class="d-flex flex-column align-items-center mb-3 pb-2 border-bottom"
+  *ngIf="auth.user$ | async as user"
+>
   <div
     [style.backgroundImage]="user?.photoUrl | safeBgUrl"
     class="profile-picture"

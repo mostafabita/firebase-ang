@@ -7,11 +7,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {}
 
   loginWithGoogle() {
-    this.authService.signInWithGoogle();
+    this.auth.signInWithGoogle();
   }
 }
