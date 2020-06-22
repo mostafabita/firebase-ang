@@ -18,7 +18,7 @@ export class LandingComponent implements OnInit {
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then((result) => {
         if (result.user !== undefined) {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigate(['/dashboard']);
         }
       });
   }

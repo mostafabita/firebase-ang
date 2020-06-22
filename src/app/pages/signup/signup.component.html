@@ -1,5 +1,7 @@
 <div class="container d-flex justify-content-center align-items-center h-100">
-  <div class="card p-4">
+  <div class="card p-5">
+    <h1 class="w-100 text-center font-weight-bold">SIGN UP</h1>
+
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="form-group">
         <label>Email</label>
@@ -13,9 +15,12 @@
           formControlName="password"
         />
       </div>
-      <button type="submit" class="btn btn-primary w-100 mt-3 text-uppercase">
-        Signup
+      <button type="submit" class="btn btn-secondary w-100 mt-3 text-uppercase">
+        SIGN UP
       </button>
+      <div class="text-center mt-3">
+        <a class="w-100 btn" routerLink="/login">Already have an account?</a>
+      </div>
     </form>
   </div>
 </div>

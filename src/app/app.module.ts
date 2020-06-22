@@ -18,6 +18,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { MasterComponent } from './pages/master/master.component';
 import { MenusComponent } from './components/menus/menus.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsComponent } from './components/toasts/toasts.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     MasterComponent,
     MenusComponent,
     ProfileComponent,
+    ToastsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
+    NgbToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
