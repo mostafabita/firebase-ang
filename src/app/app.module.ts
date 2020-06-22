@@ -22,6 +22,7 @@ import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsComponent } from './components/toasts/toasts.component';
 import { SafeBgUrlPipe } from './pipes/safe-bg-url.pipe';
 import { AbbrPipe } from './pipes/abbr.pipe';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { AbbrPipe } from './pipes/abbr.pipe';
     AngularFireAuthGuardModule,
     NgbToastModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

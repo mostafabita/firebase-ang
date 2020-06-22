@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { ToastService } from 'src/app/services/toast.service';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private afAuth: AngularFireAuth,
-    private toast: ToastService,
-    private router: Router
-  ) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -28,16 +21,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   submit() {
-    this.afAuth
-      .signInWithEmailAndPassword(
-        this.form.value.email,
-        this.form.value.password
-      )
-      .then((res) => {
-        this.router.navigate(['/dashboard']);
-      })
-      .catch((error) => {
-        this.toast.error(error.message);
-      });
+    this.authService.signInWithEmailAndPassword(
+      this.form.value.email,
+      this.form.value.password
+    );
   }
 }
