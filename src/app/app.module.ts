@@ -23,6 +23,7 @@ import { ToastsComponent } from './components/toasts/toasts.component';
 import { SafeBgUrlPipe } from './pipes/safe-bg-url.pipe';
 import { AbbrPipe } from './pipes/abbr.pipe';
 import { AuthService } from './services/auth.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AuthService } from './services/auth.service';
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
     NgbToastModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
