@@ -18,12 +18,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { MasterComponent } from './pages/master/master.component';
 import { MenusComponent } from './components/menus/menus.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsComponent } from './components/toasts/toasts.component';
 import { SafeBgUrlPipe } from './pipes/safe-bg-url.pipe';
 import { AbbrPipe } from './pipes/abbr.pipe';
 import { AuthService } from './services/auth.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { MessagingService } from './services/messaging.service';
 
 @NgModule({
   declarations: [
@@ -51,9 +53,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
     NgbToastModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
+    AngularFireMessagingModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, MessagingService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
