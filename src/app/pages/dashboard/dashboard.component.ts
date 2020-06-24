@@ -26,8 +26,12 @@ export class DashboardComponent implements OnInit {
     this.messagingService.receiveMessage();
     this.message$ = this.messagingService.currentMessage$;
 
-    this.message$.subscribe(() => {
+    this.message$.subscribe((payload) => {
       setTimeout(() => {
+        if (payload) {
+          const favicon = document.getElementById('favicon');
+          favicon.setAttribute('href', 'favicon-unread.png');
+        }
         this.changeDetector.detectChanges();
       }, 1);
     });
