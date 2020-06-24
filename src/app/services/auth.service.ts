@@ -10,6 +10,7 @@ import {
 import { User } from '../models/user';
 import { switchMap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
     private router: Router,
-    private toast: ToastService
+    private toast: ToastService,
+    private spinner: NgxSpinnerService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -36,27 +38,34 @@ export class AuthService {
 
   async signInWithGoogle() {
     try {
+      this.spinner.show();
       const provider = new auth.GoogleAuthProvider();
       const credential = await this.afAuth.auth.signInWithPopup(provider);
+      this.spinner.hide();
       if (credential.user !== undefined) {
         this.router.navigate(['/dashboard']);
       }
     } catch (error) {
+      this.spinner.hide();
       this.toast.error(error.message);
     }
   }
 
   async signInWithEmailAndPassword(email: string, password: string) {
     try {
+      this.spinner.show();
       await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+      this.spinner.hide();
       this.router.navigate(['/dashboard']);
     } catch (error) {
+      this.spinner.hide();
       this.toast.error(error.message);
     }
   }
 
   async createUser(displayName: string, email: string, password: string) {
     try {
+      this.spinner.show();
       const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
         email,
         password
@@ -65,19 +74,22 @@ export class AuthService {
         displayName,
       });
       await this.updateUserData(credential.user);
+      this.spinner.hide();
       this.router.navigate(['/dashboard']);
     } catch (error) {
+      this.spinner.hide();
       this.toast.error(error.message);
     }
   }
 
   async logout() {
+    this.spinner.show();
     await this.afAuth.auth.signOut();
+    this.spinner.hide();
     this.router.navigate(['/landing']);
   }
 
   private updateUserData(user: User) {
-    debugger;
     const userRef: AngularFirestoreDocument<User> = this.afStore.doc(
       `users/${user.uid}`
     );
