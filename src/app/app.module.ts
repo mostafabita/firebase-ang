@@ -26,6 +26,7 @@ import { AuthService } from './services/auth.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { MessagingService } from './services/messaging.service';
+import { AsyncPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { MessagingService } from './services/messaging.service';
     }),
     AngularFireMessagingModule,
   ],
-  providers: [AuthService, MessagingService],
+  providers: [AuthService, MessagingService, AsyncPipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

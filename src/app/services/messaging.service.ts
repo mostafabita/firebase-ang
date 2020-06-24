@@ -6,10 +6,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class MessagingService {
-  currentMessage = new BehaviorSubject(null);
+  currentMessage$ = new BehaviorSubject(null);
 
-  constructor(private angularFireMessaging: AngularFireMessaging) {
-    this.angularFireMessaging.messages.subscribe((messaging: any) => {
+  constructor(public angularFireMessaging: AngularFireMessaging) {
+    this.angularFireMessaging.messaging.subscribe((messaging) => {
       messaging.onMessage = messaging.onMessage.bind(messaging);
       messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
     });
@@ -28,9 +28,8 @@ export class MessagingService {
 
   receiveMessage() {
     this.angularFireMessaging.messages.subscribe((payload) => {
-      debugger;
       console.log('new message received. ', payload);
-      this.currentMessage.next(payload);
+      this.currentMessage$.next(payload);
     });
   }
 }

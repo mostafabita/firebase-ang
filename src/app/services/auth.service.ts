@@ -37,7 +37,7 @@ export class AuthService {
   async signInWithGoogle() {
     try {
       const provider = new auth.GoogleAuthProvider();
-      const credential = await this.afAuth.signInWithPopup(provider);
+      const credential = await this.afAuth.auth.signInWithPopup(provider);
       if (credential.user !== undefined) {
         this.router.navigate(['/dashboard']);
       }
@@ -48,7 +48,7 @@ export class AuthService {
 
   async signInWithEmailAndPassword(email: string, password: string) {
     try {
-      await this.afAuth.signInWithEmailAndPassword(email, password);
+      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       this.router.navigate(['/dashboard']);
     } catch (error) {
       this.toast.error(error.message);
@@ -57,7 +57,7 @@ export class AuthService {
 
   async createUser(displayName: string, email: string, password: string) {
     try {
-      const credential = await this.afAuth.createUserWithEmailAndPassword(
+      const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
         email,
         password
       );
@@ -72,7 +72,7 @@ export class AuthService {
   }
 
   async logout() {
-    await this.afAuth.signOut();
+    await this.afAuth.auth.signOut();
     this.router.navigate(['/landing']);
   }
 
