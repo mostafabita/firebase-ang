@@ -13,7 +13,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { CoursesComponent } from './components/courses/courses.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MasterComponent } from './pages/master/master.component';
 import { MenusComponent } from './components/menus/menus.component';
@@ -28,11 +27,11 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { MessagingService } from './services/messaging.service';
 import { AsyncPipe } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,
     LoginComponent,
     SignupComponent,
     LandingComponent,
@@ -44,6 +43,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastsComponent,
     SafeBgUrlPipe,
     AbbrPipe,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

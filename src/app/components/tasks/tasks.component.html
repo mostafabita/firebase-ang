@@ -1,0 +1,25 @@
+<form
+  #formDirective="ngForm"
+  [formGroup]="form"
+  (submit)="submit(formDirective)"
+>
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter task"
+      formControlName="task"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-success" type="button">
+        Add
+      </button>
+    </div>
+  </div>
+</form>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let task of tasks">
+    {{ task.title }}
+  </li>
+</ul>

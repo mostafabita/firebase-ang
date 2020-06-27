@@ -5,11 +5,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MasterComponent } from './pages/master/master.component';
-import { CoursesComponent } from './components/courses/courses.component';
 import {
   AngularFireAuthGuard,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 const routes: Routes = [
   {
@@ -50,10 +50,10 @@ const routes: Routes = [
         },
       },
       {
-        path: 'courses',
-        component: CoursesComponent,
+        path: 'tasks',
+        component: TasksComponent,
         data: {
-          title: 'Courses',
+          title: 'Tasks',
         },
       },
     ],
