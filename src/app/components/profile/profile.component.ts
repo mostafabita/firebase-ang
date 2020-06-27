@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase';
 import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(public auth: AuthService) {}
+  user$: Observable<User>;
+
+  constructor(private auth: AuthService) {
+    this.user$ = this.auth.user$;
+  }
 
   ngOnInit(): void {}
 }

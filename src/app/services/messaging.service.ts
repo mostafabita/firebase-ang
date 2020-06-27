@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from './auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -8,16 +11,21 @@ import { BehaviorSubject } from 'rxjs';
 export class MessagingService {
   currentMessage$ = new BehaviorSubject(null);
 
-  constructor(public angularFireMessaging: AngularFireMessaging) {
-    this.angularFireMessaging.messaging.subscribe((messaging) => {
+  constructor(
+    private afMessaging: AngularFireMessaging,
+    private afStore: AngularFirestore,
+    private auth: AuthService
+  ) {
+    this.afMessaging.messaging.subscribe((messaging) => {
       messaging.onMessage = messaging.onMessage.bind(messaging);
       messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
     });
   }
 
   requestPermission() {
-    this.angularFireMessaging.requestToken.subscribe(
+    this.afMessaging.requestToken.subscribe(
       (token) => {
+        this.updateToken(token);
         console.log(token);
       },
       (error) => {
@@ -27,9 +35,16 @@ export class MessagingService {
   }
 
   receiveMessage() {
-    this.angularFireMessaging.messages.subscribe((payload) => {
+    this.afMessaging.messages.subscribe((payload) => {
       console.log('new message received. ', payload);
       this.currentMessage$.next(payload);
+    });
+  }
+
+  updateToken(token: string) {
+    this.auth.user$.subscribe((user: User) => {
+      const tokenRef = this.afStore.doc(`fcmTokens/${user.uid}`);
+      tokenRef.set({ token });
     });
   }
 }

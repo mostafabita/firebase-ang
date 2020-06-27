@@ -39,6 +39,7 @@ export class AuthService {
       const provider = new auth.GoogleAuthProvider();
       const credential = await this.afAuth.auth.signInWithPopup(provider);
       if (credential.user !== undefined) {
+        await this.updateUserData(credential.user);
         this.router.navigate(['/dashboard']);
       }
     } catch (error) {
@@ -77,7 +78,6 @@ export class AuthService {
   }
 
   private updateUserData(user: User) {
-    debugger;
     const userRef: AngularFirestoreDocument<User> = this.afStore.doc(
       `users/${user.uid}`
     );
