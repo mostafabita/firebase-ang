@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "my-test-firebase-project-3eb77": {
+      "hosting": {
+        "firebase-ang": [
+          "my-test-firebase-project-3eb77"
+        ]
+      }
+    }
+  }
+}
