@@ -1,4 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MessagingService } from 'src/app/services/messaging.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Observable } from 'rxjs';
@@ -10,19 +15,25 @@ import { Observable } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
   message$: Observable<any>;
-  message;
 
-  constructor(private messagingService: MessagingService) {}
+  constructor(
+    private messagingService: MessagingService,
+    private changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.messagingService.requestPermission();
     this.messagingService.receiveMessage();
     this.message$ = this.messagingService.currentMessage$;
 
-    this.messagingService.currentMessage$.subscribe((res) => {
+    this.message$.subscribe((payload) => {
       setTimeout(() => {
-        this.message = res;
-      }, 1000);
+        if (payload) {
+          const favicon = document.getElementById('favicon');
+          favicon.setAttribute('href', 'favicon-unread.png');
+        }
+        this.changeDetector.detectChanges();
+      }, 1);
     });
   }
 }
