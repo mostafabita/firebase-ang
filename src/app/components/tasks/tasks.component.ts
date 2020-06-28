@@ -6,8 +6,10 @@ import {
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
+import { faTimes, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from '@fortawesome/free-regular-svg-icons';
+import { User, Task } from '../../models/user';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-tasks',
@@ -17,6 +19,9 @@ import { User } from 'src/app/models/user';
 export class TasksComponent implements OnInit {
   form: FormGroup;
   tasks: any[];
+  removeIcon = faTimes;
+  checkedIcon = faCheckSquare;
+  uncheckedIcon = faSquare;
 
   constructor(
     private db: AngularFirestore,
@@ -27,28 +32,42 @@ export class TasksComponent implements OnInit {
       task: ['', Validators.required],
     });
   }
-
   ngOnInit() {
     this.db
       .collection('/tasks')
-      .valueChanges()
+      .valueChanges({ idField: 'id' })
       .subscribe((data) => {
         this.tasks = data;
       });
   }
-
   submit(form: FormGroupDirective) {
     if (form.invalid) {
       return;
     }
     this.auth.user$.subscribe((user: User) => {
-      const body = {
+      const data: Task = {
         title: form.value.task,
         done: false,
         userId: user.uid,
+        order: this.tasks.length,
       };
-      this.db.collection('/tasks').add(body);
+      this.db.collection('/tasks').add(data);
       form.resetForm();
     });
+  }
+
+  toggleStatus(task: Task) {
+    const taskRef = this.db.doc(`/tasks/${task.id}`);
+    const data = {
+      title: task.title,
+      done: !task.done,
+      userId: task.userId,
+      order: task.order,
+    };
+    taskRef.set(data);
+  }
+
+  removeTask(task: Task) {
+    this.db.doc(`/tasks/${task.id}`).delete();
   }
 }

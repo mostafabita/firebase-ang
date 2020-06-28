@@ -11,7 +11,7 @@
       formControlName="task"
     />
     <div class="input-group-append">
-      <button class="btn btn-success" type="button">
+      <button class="btn btn-primary" type="button">
         Add
       </button>
     </div>
@@ -19,7 +19,35 @@
 </form>
 
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let task of tasks">
-    {{ task.title }}
+  <li
+    class="list-group-item d-flex justify-content-between my-1 border-top"
+    [ngClass]="{ checked: task.done }"
+    *ngFor="let task of tasks"
+  >
+    <div>
+      <fa-icon
+        *ngIf="task.done"
+        [icon]="checkedIcon"
+        class="text-success mx-2 cursor-pointer"
+        (click)="toggleStatus(task)"
+      ></fa-icon>
+      <fa-icon
+        *ngIf="!task.done"
+        [icon]="uncheckedIcon"
+        class="mx-2 cursor-pointer"
+        (click)="toggleStatus(task)"
+      ></fa-icon>
+      <span> {{ task.title }}</span>
+    </div>
+
+    <fa-icon
+      [icon]="removeIcon"
+      class="mx-2 cursor-pointer"
+      (click)="removeTask(task)"
+    ></fa-icon>
   </li>
 </ul>
+
+<div class="alert alert-light" role="alert" *ngIf="!tasks.length">
+  There is not any task to do—check it out!
+</div>

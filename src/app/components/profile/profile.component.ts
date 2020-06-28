@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from 'firebase';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile',

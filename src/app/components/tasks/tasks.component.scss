@@ -1,0 +1,13 @@
+.cursor-pointer {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.list-group-item {
+  &.checked {
+    text-decoration: line-through;
+  }
+}

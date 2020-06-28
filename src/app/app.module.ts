@@ -27,6 +27,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { MessagingService } from './services/messaging.service';
 import { AsyncPipe } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TasksComponent } from './components/tasks/tasks.component';
 
 @NgModule({
@@ -61,6 +62,7 @@ import { TasksComponent } from './components/tasks/tasks.component';
     }),
     AngularFireMessagingModule,
     NgxSpinnerModule,
+    FontAwesomeModule,
   ],
   providers: [AuthService, MessagingService, AsyncPipe],
   bootstrap: [AppComponent],
