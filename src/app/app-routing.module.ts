@@ -6,10 +6,15 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MasterComponent } from './pages/master/master.component';
 import {
-  AngularFireAuthGuard,
   redirectUnauthorizedTo,
+  redirectLoggedInTo,
+  canActivate,
 } from '@angular/fire/auth-guard';
 import { TasksComponent } from './components/tasks/tasks.component';
+
+function customRedirectLoggedInTo() {
+  return redirectLoggedInTo(['/dashboard']);
+}
 
 const routes: Routes = [
   {
@@ -20,22 +25,22 @@ const routes: Routes = [
   {
     path: 'landing',
     component: LandingComponent,
+    ...canActivate(customRedirectLoggedInTo()),
   },
   {
     path: 'login',
     component: LoginComponent,
+    ...canActivate(customRedirectLoggedInTo()),
   },
   {
     path: 'signup',
     component: SignupComponent,
+    ...canActivate(customRedirectLoggedInTo()),
   },
   {
     path: 'dashboard',
     component: MasterComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: {
-      authGuardPipe: () => redirectUnauthorizedTo(['']),
-    },
+    ...canActivate(redirectUnauthorizedTo(['landing'])),
     children: [
       {
         path: '',

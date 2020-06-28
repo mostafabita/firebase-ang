@@ -20,7 +20,7 @@
 
 <ul class="list-group">
   <li
-    class="list-group-item d-flex justify-content-between my-1 border-top"
+    class="list-group-item d-flex justify-content-between"
     [ngClass]="{ checked: task.done }"
     *ngFor="let task of tasks"
   >
@@ -37,7 +37,12 @@
         class="mx-2 cursor-pointer"
         (click)="toggleStatus(task)"
       ></fa-icon>
-      <span> {{ task.title }}</span>
+      <span>
+        {{ task.title }}
+        <small class="badge badge-pill badge-light mx-2" style="font-size: 60%;">
+          {{ task.user?.displayName }}
+        </small>
+      </span>
     </div>
 
     <fa-icon
@@ -48,6 +53,6 @@
   </li>
 </ul>
 
-<div class="alert alert-light" role="alert" *ngIf="!tasks.length">
+<div class="alert alert-light" role="alert" *ngIf="!tasks?.length">
   There is not any task to do—check it out!
 </div>
