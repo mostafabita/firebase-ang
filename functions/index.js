@@ -17,20 +17,13 @@ exports.fcmSend = functions.firestore
     };
     admin
       .firestore()
-      .collection('fcmTokens')
-      .doc(task.userId)
+      .doc(`/fcmTokens/${task.userId}`)
       .get()
-      .then((token) => {
-        console.log(token);
-        return token.token;
+      .then((ref) => ref.data())
+      .then((data) => {
+        return admin.messaging().sendToDevice(data.token, payload);
       })
-      .then((token) => {
-        return admin.messaging().sendToDevice(token, payload);
-      })
-      .then((res) => {
-        console.log('Sent successfully', res);
-        return res;
-      })
+      .then((res) => console.log('Sent successfully!', res))
       .catch((error) => {
         console.log(error);
       });
