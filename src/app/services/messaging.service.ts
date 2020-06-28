@@ -43,7 +43,7 @@ export class MessagingService {
 
   updateToken(token: string) {
     this.auth.user$.subscribe((user: User) => {
-      const tokenRef = this.afStore.doc(`fcmTokens/${user.uid}`);
+      const tokenRef = this.afStore.doc(`/fcmTokens/${user.uid}`);
       tokenRef.set({ token });
     });
   }

@@ -8,5 +8,11 @@ service cloud.firestore {
     	allow read, create: if request.auth != null;
       allow delete, update: if request.auth != null && request.auth.uid == resource.data.userId;
     }
+    match /fcmTokens/{fcmTokenID} {
+    	allow read, write: if request.auth != null;
+    }
+    match /users/{userID} {
+    	allow read, write: if request.auth != null;
+    }
   }
 }
